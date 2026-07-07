@@ -480,7 +480,7 @@ img {
 }
 .product-media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   display: flex;
   align-items: center;
   justify-content: center;

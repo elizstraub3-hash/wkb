@@ -93,9 +93,19 @@ Todas as alterações são salvas no navegador (**localStorage**) e aparecem
 
 ### Sobre as imagens
 
-Cada produto pode ter uma **foto real** (cole a URL da imagem no campo
-"URL da imagem"). Se o campo ficar vazio, o site mostra uma **ilustração neon**
-da categoria — nada de fotos falsas.
+As fotos reais dos produtos ficam na pasta **`assets/products/`**. Cada produto
+aponta para a sua foto pelo campo "URL da imagem" (ex.: `assets/products/kit-barbie.jpg`).
+
+- Para **trocar a foto** de um kit, substitua o arquivo em `assets/products/`
+  mantendo o mesmo nome, ou cole uma nova URL/caminho no campo do painel.
+- Se o campo ficar vazio, o site mostra uma **ilustração neon** da categoria —
+  nada de fotos falsas.
+
+O catálogo já vem com os **6 kits reais da loja** (estojos e bandejas), com preço
+no valor de cada um (R$ 105 a R$ 180).
+
+> Sempre que você editar o catálogo padrão em `js/data.js`, aumente o número
+> `DATA_VERSION` para que a loja recarregue as novidades para quem já visitou.
 
 > ⚠️ **Importante:** por usar `localStorage`, os dados ficam salvos **no navegador
 > em que foram editados**. Para uma loja com estoque compartilhado entre vários

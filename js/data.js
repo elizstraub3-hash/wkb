@@ -24,138 +24,74 @@ const WKB_CONFIG = {
 
 /* Categorias padrão. O "icon" define a ilustração SVG do card. */
 const DEFAULT_CATEGORIES = [
-  { id: 'sedas', name: 'Sedas & Piteiras', icon: 'seda' },
-  { id: 'bongs', name: 'Bongs & Bakos', icon: 'bong' },
-  { id: 'dichavadores', name: 'Dichavadores', icon: 'grinder' },
-  { id: 'isqueiros', name: 'Isqueiros & Maçaricos', icon: 'lighter' },
-  { id: 'cuias', name: 'Cuias & Fornos', icon: 'bowl' },
-  { id: 'acessorios', name: 'Acessórios', icon: 'tray' },
+  { id: 'kits-estojo', name: 'Kits com Estojo', icon: 'tray' },
+  { id: 'kits-bandeja', name: 'Kits com Bandeja', icon: 'tray' },
 ];
 
-/* Catálogo inicial com produtos reais de headshop.
+/* Catálogo inicial com produtos reais da WKB Headshop.
    status: 'disponivel' ou 'esgotado'.
-   image: deixe vazio ('') para usar a ilustração da categoria,
-          ou coloque uma URL de foto real do produto. */
+   image: caminho da foto real do produto (deixe vazio para usar
+          a ilustração neon da categoria). */
 const DEFAULT_PRODUCTS = [
   {
     id: 'p1',
-    name: 'Seda King Size Slim',
-    category: 'sedas',
-    description: 'Papel longo e fino para montagens perfeitas, com queima lenta e uniforme.',
-    price: 4.9,
+    name: 'Kit Estojo Vermelho',
+    category: 'kits-estojo',
+    description: 'Estojo antiodor completo com sedas, dichavador, piteira, filtros e acessórios. Tema vermelho/azul.',
+    price: 105,
     status: 'disponivel',
-    image: '',
-    icon: 'seda',
+    image: 'assets/products/kit-vermelho.jpg',
+    icon: 'tray',
   },
   {
     id: 'p2',
-    name: 'Piteira de Vidro Reutilizável',
-    category: 'sedas',
-    description: 'Piteira de vidro borossilicato, lavável e durável. Sabor limpo a cada uso.',
-    price: 9.9,
+    name: 'Kit Estojo Red Smoking',
+    category: 'kits-estojo',
+    description: 'Estojo com sedas Smoking/Elite, dichavador, isqueiro e potinho de silicone. Tema vermelho.',
+    price: 110,
     status: 'disponivel',
-    image: '',
-    icon: 'seda',
+    image: 'assets/products/kit-red-smoking.jpg',
+    icon: 'tray',
   },
   {
     id: 'p3',
-    name: 'Dichavador de Metal 4 Partes',
-    category: 'dichavadores',
-    description: 'Liga de zinco resistente, dentes afiados e coletor de pólen na base.',
-    price: 39.9,
+    name: 'Kit Bandeja Papelito',
+    category: 'kits-bandeja',
+    description: 'Bandeja Papelito + sedas Smoking/Zomo, dichavador, isqueiro e piteira. Kit completo pra montar.',
+    price: 115,
     status: 'disponivel',
-    image: '',
-    icon: 'grinder',
+    image: 'assets/products/kit-bandeja-papelito.jpg',
+    icon: 'tray',
   },
   {
     id: 'p4',
-    name: 'Dichavador Acrílico 3 Partes',
-    category: 'dichavadores',
-    description: 'Leve, transparente e prático para levar para qualquer lugar.',
-    price: 14.9,
-    status: 'esgotado',
-    image: '',
-    icon: 'grinder',
+    name: 'Kit Estojo Verde',
+    category: 'kits-estojo',
+    description: 'Estojo antiodor com sedas King Size, dichavador, piteira e potinho de silicone. Tema verde.',
+    price: 130,
+    status: 'disponivel',
+    image: 'assets/products/kit-verde.jpg',
+    icon: 'tray',
   },
   {
     id: 'p5',
-    name: 'Bong de Vidro 30cm',
-    category: 'bongs',
-    description: 'Vidro grosso com base estável e difusor. Filtragem suave e potente.',
-    price: 129.9,
+    name: 'Kit Premium Papelito Onça',
+    category: 'kits-bandeja',
+    description: 'Bandeja Papelito Onça + estojo, sedas OCB/Zomo, piteira Sadhu, tesoura e dichavador. Edição premium.',
+    price: 180,
     status: 'disponivel',
-    image: '',
-    icon: 'bong',
+    image: 'assets/products/kit-papelito-onca.jpg',
+    icon: 'tray',
   },
   {
     id: 'p6',
-    name: 'Bong de Silicone Portátil',
-    category: 'bongs',
-    description: 'Inquebrável, dobrável e fácil de limpar. Ideal para viagens.',
-    price: 89.9,
+    name: 'Kit Premium Barbie',
+    category: 'kits-bandeja',
+    description: 'Bandeja Barbie + estojo, sedas Elite/OCB, dichavador temático, piteira e acessórios. Edição premium.',
+    price: 180,
     status: 'disponivel',
-    image: '',
-    icon: 'bong',
-  },
-  {
-    id: 'p7',
-    name: 'Cuia de Cerâmica para Bong',
-    category: 'cuias',
-    description: 'Forno de cerâmica resistente ao calor, encaixe universal 14mm.',
-    price: 24.9,
-    status: 'disponivel',
-    image: '',
-    icon: 'bowl',
-  },
-  {
-    id: 'p8',
-    name: 'Isqueiro Maçarico Antivento',
-    category: 'isqueiros',
-    description: 'Chama azul de alta temperatura, recarregável e à prova de vento.',
-    price: 34.9,
-    status: 'disponivel',
-    image: '',
-    icon: 'lighter',
-  },
-  {
-    id: 'p9',
-    name: 'Isqueiro Clipper Recarregável',
-    category: 'isqueiros',
-    description: 'Clássico Clipper com pedra removível. Recarregável e durável.',
-    price: 12.9,
-    status: 'disponivel',
-    image: '',
-    icon: 'lighter',
-  },
-  {
-    id: 'p10',
-    name: 'Bandeja de Metal Estampada',
-    category: 'acessorios',
-    description: 'Bandeja de metal com bordas altas para organizar sua montagem.',
-    price: 29.9,
-    status: 'disponivel',
-    image: '',
+    image: 'assets/products/kit-barbie.jpg',
     icon: 'tray',
-  },
-  {
-    id: 'p11',
-    name: 'Case Térmico Antiodor',
-    category: 'acessorios',
-    description: 'Estojo com forro que bloqueia o cheiro. Compartimentos internos.',
-    price: 59.9,
-    status: 'esgotado',
-    image: '',
-    icon: 'tray',
-  },
-  {
-    id: 'p12',
-    name: 'Piteira de Papel Filtro',
-    category: 'sedas',
-    description: 'Bloco destacável de piteiras de papel. Filtragem básica e prática.',
-    price: 6.9,
-    status: 'disponivel',
-    image: '',
-    icon: 'seda',
   },
 ];
 
@@ -169,19 +105,22 @@ const STORAGE_KEYS = {
   version: 'wkb_data_version',
 };
 
-const DATA_VERSION = '1';
+/* Sempre que o catálogo padrão (DEFAULT_PRODUCTS/CATEGORIES) mudar aqui no
+   código, aumente este número. Isso faz a loja recarregar o catálogo novo
+   para quem já visitou o site antes. */
+const DATA_VERSION = '2';
 
 const WKBStore = {
-  /* Garante que o localStorage tenha os dados iniciais. */
+  /* Garante que o localStorage tenha os dados iniciais.
+     Na primeira visita, ou quando DATA_VERSION muda, recarrega o
+     catálogo padrão definido neste arquivo. */
   init() {
     const version = localStorage.getItem(STORAGE_KEYS.version);
-    if (version !== DATA_VERSION || !localStorage.getItem(STORAGE_KEYS.products)) {
-      if (!localStorage.getItem(STORAGE_KEYS.products)) {
-        localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(DEFAULT_PRODUCTS));
-      }
-      if (!localStorage.getItem(STORAGE_KEYS.categories)) {
-        localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(DEFAULT_CATEGORIES));
-      }
+    const hasProducts = !!localStorage.getItem(STORAGE_KEYS.products);
+    if (!hasProducts || version !== DATA_VERSION) {
+      localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(DEFAULT_PRODUCTS));
+      localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(DEFAULT_CATEGORIES));
+      localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify([]));
       localStorage.setItem(STORAGE_KEYS.version, DATA_VERSION);
     }
   },
