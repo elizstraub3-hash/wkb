@@ -18,7 +18,8 @@ const WKB_CONFIG = {
   slogan: 'Estilo para sua brisa',
   // Número do WhatsApp que recebe os pedidos (formato internacional, só dígitos)
   // Ex.: 55 (Brasil) + DDD + número  ->  5511999999999
-  whatsapp: '5511999999999',
+  // (41) 99791-6235
+  whatsapp: '5541997916235',
   currency: 'R$',
 
   // Senha do painel administrativo (admin.html)
