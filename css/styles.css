@@ -243,6 +243,22 @@ img {
   margin: 0 auto;
 }
 
+/* Hero simplificado: só a logo e uma frase */
+.hero-simple {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hero-logo-main {
+  width: clamp(280px, 60vw, 460px);
+  height: auto;
+  border-radius: 24px;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 0 40px rgba(57, 255, 20, 0.28));
+  animation: logoFloat 5s ease-in-out infinite;
+}
+
 /* Emblema (logo) no topo do hero */
 .hero-logo {
   width: clamp(110px, 22vw, 168px);
