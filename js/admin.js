@@ -113,7 +113,11 @@
         }</div>
           </td>
           <td>${escapeHtml(WKBStore.categoryName(p.category))}</td>
-          <td><strong>${WKBStore.formatPrice(p.price)}</strong></td>
+          <td><strong>${
+            WKBStore.hasPrice(p.price)
+              ? WKBStore.formatPrice(p.price)
+              : '<span style="color:var(--neon-orange)">SEM PREÇO</span>'
+          }</strong></td>
           <td><span class="pill ${p.status}">${p.status === 'esgotado' ? 'Esgotado' : 'Disponível'}</span></td>
           <td>
             <div class="row-actions">
