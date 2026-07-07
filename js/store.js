@@ -370,6 +370,9 @@
 
     const lines = [];
     lines.push('🛒 *NOVO PEDIDO — WKB HEADSHOP*');
+    // Tipo do pedido em destaque, logo no topo, para facilitar
+    const tipo = fulfillment === 'entrega' ? '🏍️ ENTREGA (UBERMOTO)' : '🏬 RETIRADA NO LOCAL';
+    lines.push('📌 *TIPO: ' + tipo + '*');
     lines.push('');
 
     const nome =
