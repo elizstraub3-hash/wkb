@@ -394,7 +394,7 @@
     lines.push('');
 
     if (fulfillment === 'entrega') {
-      lines.push('🏍️ *Forma:* Entrega por UberMoto');
+      lines.push('🏍️ *Forma:* Entrega por UberMoto (o cliente solicita a corrida)');
       lines.push('');
       lines.push('*Dados de entrega:*');
       lines.push('Nome: ' + $('#dfNome').value.trim());

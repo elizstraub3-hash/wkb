@@ -35,8 +35,8 @@ const WKB_CONFIG = {
   deliveryTerms: [
     'Confirmo que sou maior de 18 anos.',
     'Confirmo que os dados de entrega informados estão corretos e completos.',
-    'Estou ciente de que a entrega é feita por UberMoto, ou por retirada no local.',
-    'A taxa da corrida (UberMoto) é combinada e informada pelo WhatsApp conforme a região.',
+    'A loja NÃO solicita o UberMoto: o próprio cliente solicita a corrida para buscar o pedido, ou retira no local.',
+    'A solicitação e a taxa do UberMoto são de responsabilidade do cliente.',
     'O pagamento é feito via PIX; o pedido é separado após a confirmação do pagamento.',
     'Produtos são acessórios para uso adulto e legal. Não há troca de itens já utilizados.',
   ],
