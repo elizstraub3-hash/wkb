@@ -143,6 +143,24 @@ no valor de cada um (R$ 105 a R$ 180).
 Para trocar o logo, substitua **`assets/logo.svg`** (ou aponte as tags `<img>`
 para um `.png`/`.jpg` seu).
 
+O **fundo do site** fica em **`assets/wkb-fundo.jpg`** (aplicado com uma camada
+escura por cima para o conteúdo continuar legível). Para trocar, substitua esse
+arquivo mantendo o nome.
+
+## 🔢 Código dos produtos
+
+Cada produto tem um **código** (ex.: `WKB-001`) que aparece:
+- no card do produto (etiqueta azul),
+- no carrinho,
+- na tabela do painel admin,
+- e na mensagem do WhatsApp (`[WKB-001] 1x Kit ...`).
+
+Assim fica fácil você e o cliente falarem do mesmo item. O painel **sugere o
+próximo código automaticamente** ao cadastrar um produto novo (você pode editar).
+
+> Produtos com **preço 0** aparecem como **“A combinar”** e ficam sem o botão de
+> compra até você definir o valor no painel — útil para itens que ainda não têm preço.
+
 ## 💳 Pagamento (PIX) e Termo de entrega
 
 - O **PIX** aparece no carrinho (com botão **Copiar**), na página "Como comprar",

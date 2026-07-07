@@ -105,6 +105,7 @@
           p,
           i
         )}</div></td>
+          <td><strong style="color:var(--neon-blue)">${escapeHtml(p.code || '—')}</strong></td>
           <td>
             <strong>${escapeHtml(p.name)}</strong>
             <div class="footer-note">${escapeHtml((p.description || '').slice(0, 48))}${
@@ -164,6 +165,7 @@
     if (!p) return;
     editingId = id;
     $('#pId').value = p.id;
+    $('#pCode').value = p.code || '';
     $('#pName').value = p.name;
     $('#pPrice').value = p.price;
     fillCategorySelect();
@@ -182,6 +184,8 @@
     editingId = null;
     $('#productForm').reset();
     $('#pId').value = '';
+    // Já sugere o próximo código para um novo produto
+    $('#pCode').value = WKBStore.nextCode();
     $('#formTitle').textContent = '➕ Adicionar produto';
     $('#saveBtn').textContent = 'Salvar produto';
     $('#cancelEditBtn').style.display = 'none';
@@ -190,14 +194,16 @@
   function submitForm(e) {
     e.preventDefault();
     const name = $('#pName').value.trim();
-    const price = parseFloat($('#pPrice').value);
+    const priceRaw = $('#pPrice').value.trim();
+    const price = priceRaw === '' ? 0 : parseFloat(priceRaw);
     const category = $('#pCategory').value;
     if (!name || isNaN(price) || !category) {
-      toast('Preencha nome, preço e categoria.');
+      toast('Preencha nome e categoria (preço 0 = A combinar).');
       return;
     }
     const cat = WKBStore.getCategory(category);
     const data = {
+      code: $('#pCode').value.trim() || WKBStore.nextCode(),
       name,
       price,
       category,
@@ -263,6 +269,7 @@
     $('#loginOverlay').style.display = 'none';
     $('#adminShell').style.display = 'block';
     renderAll();
+    resetForm(); // pré-preenche o próximo código
   }
 
   function handleLogin(e) {

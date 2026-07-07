@@ -45,15 +45,19 @@ const WKB_CONFIG = {
 const DEFAULT_CATEGORIES = [
   { id: 'kits-estojo', name: 'Kits com Estojo', icon: 'tray' },
   { id: 'kits-bandeja', name: 'Kits com Bandeja', icon: 'tray' },
+  { id: 'kits-cesta', name: 'Kits com Cesta', icon: 'tray' },
 ];
 
 /* Catálogo inicial com produtos reais da WKB Headshop.
+   code:   código do produto (ex.: WKB-001) para facilitar a comunicação.
    status: 'disponivel' ou 'esgotado'.
-   image: caminho da foto real do produto (deixe vazio para usar
-          a ilustração neon da categoria). */
+   price:  0 = "A combinar" (preço ainda não definido; defina no painel).
+   image:  caminho da foto real do produto (deixe vazio para usar
+           a ilustração neon da categoria). */
 const DEFAULT_PRODUCTS = [
   {
     id: 'p1',
+    code: 'WKB-001',
     name: 'Kit Estojo Vermelho',
     category: 'kits-estojo',
     description: 'Estojo antiodor completo com sedas, dichavador, piteira, filtros e acessórios. Tema vermelho/azul.',
@@ -64,6 +68,7 @@ const DEFAULT_PRODUCTS = [
   },
   {
     id: 'p2',
+    code: 'WKB-002',
     name: 'Kit Estojo Red Smoking',
     category: 'kits-estojo',
     description: 'Estojo com sedas Smoking/Elite, dichavador, isqueiro e potinho de silicone. Tema vermelho.',
@@ -74,6 +79,7 @@ const DEFAULT_PRODUCTS = [
   },
   {
     id: 'p3',
+    code: 'WKB-003',
     name: 'Kit Bandeja Papelito',
     category: 'kits-bandeja',
     description: 'Bandeja Papelito + sedas Smoking/Zomo, dichavador, isqueiro e piteira. Kit completo pra montar.',
@@ -84,6 +90,7 @@ const DEFAULT_PRODUCTS = [
   },
   {
     id: 'p4',
+    code: 'WKB-004',
     name: 'Kit Estojo Verde',
     category: 'kits-estojo',
     description: 'Estojo antiodor com sedas King Size, dichavador, piteira e potinho de silicone. Tema verde.',
@@ -94,6 +101,7 @@ const DEFAULT_PRODUCTS = [
   },
   {
     id: 'p5',
+    code: 'WKB-005',
     name: 'Kit Premium Papelito Onça',
     category: 'kits-bandeja',
     description: 'Bandeja Papelito Onça + estojo, sedas OCB/Zomo, piteira Sadhu, tesoura e dichavador. Edição premium.',
@@ -104,12 +112,125 @@ const DEFAULT_PRODUCTS = [
   },
   {
     id: 'p6',
+    code: 'WKB-006',
     name: 'Kit Premium Barbie',
     category: 'kits-bandeja',
     description: 'Bandeja Barbie + estojo, sedas Elite/OCB, dichavador temático, piteira e acessórios. Edição premium.',
     price: 180,
     status: 'disponivel',
     image: 'assets/products/kit-barbie.jpg',
+    icon: 'tray',
+  },
+
+  /* --- Kits novos (preço "A combinar" = 0; ajuste no painel admin) --- */
+  {
+    id: 'p7',
+    code: 'WKB-007',
+    name: 'Kit Bandeja Culturadab Verde',
+    category: 'kits-bandeja',
+    description: 'Bandeja Culturadab + sedas Zomo, dichavador, piteira e acessórios. Tema verde.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-culturadab-verde.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p8',
+    code: 'WKB-008',
+    name: 'Kit Cesta Cactos Azul',
+    category: 'kits-cesta',
+    description: 'Cesta com sedas, dichavador, piteira e acessórios. Tema cactos/azul.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-cactos-azul.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p9',
+    code: 'WKB-009',
+    name: 'Kit Bandeja Billie',
+    category: 'kits-bandeja',
+    description: 'Bandeja tema Billie/Peace + sedas, dichavador, piteira e adesivo. Tema roxo.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-billie-peace.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p10',
+    code: 'WKB-010',
+    name: 'Kit Bandeja Bob Esponja',
+    category: 'kits-bandeja',
+    description: 'Bandeja tema Bob Esponja + sedas, dichavador, piteira e acessórios. Tema amarelo.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-bob-esponja.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p11',
+    code: 'WKB-011',
+    name: 'Kit Bandeja Culturadab Bee (KTV)',
+    category: 'kits-bandeja',
+    description: 'Bandeja Culturadab Bee + sedas KTV, dichavador, piteira e acessórios. Tema amarelo.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-culturadab-bee-ktv.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p12',
+    code: 'WKB-012',
+    name: 'Kit Bandeja Culturadab Bee (Papelito)',
+    category: 'kits-bandeja',
+    description: 'Bandeja Culturadab Bee + sedas Papelito, dichavador, piteira e acessórios. Tema amarelo.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-culturadab-bee-papelito.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p13',
+    code: 'WKB-013',
+    name: 'Kit Cesta Papelito',
+    category: 'kits-cesta',
+    description: 'Cesta com sedas Papelito, dichavador, piteira e acessórios. Tema verde.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-cesta-papelito.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p14',
+    code: 'WKB-014',
+    name: 'Kit Bandeja Skate Die',
+    category: 'kits-bandeja',
+    description: 'Bandeja tema Skate + sedas, dichavador, piteira e acessórios. Tema verde.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-skate-die.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p15',
+    code: 'WKB-015',
+    name: 'Kit Bandeja Papelito Verde',
+    category: 'kits-bandeja',
+    description: 'Bandeja Papelito + sedas Smoking, dichavador, piteira e acessórios. Tema verde.',
+    price: 130,
+    status: 'disponivel',
+    image: 'assets/products/kit-papelito-verde.jpg',
+    icon: 'tray',
+  },
+  {
+    id: 'p16',
+    code: 'WKB-016',
+    name: 'Kit Cesta Billie Eilish',
+    category: 'kits-cesta',
+    description: 'Cesta tema Billie Eilish + sedas, dichavador, piteira e acessórios. Tema roxo.',
+    price: 0,
+    status: 'disponivel',
+    image: 'assets/products/kit-cesta-billie.jpg',
     icon: 'tray',
   },
 ];
@@ -127,7 +248,7 @@ const STORAGE_KEYS = {
 /* Sempre que o catálogo padrão (DEFAULT_PRODUCTS/CATEGORIES) mudar aqui no
    código, aumente este número. Isso faz a loja recarregar o catálogo novo
    para quem já visitou o site antes. */
-const DATA_VERSION = '2';
+const DATA_VERSION = '3';
 
 const WKBStore = {
   /* Garante que o localStorage tenha os dados iniciais.
@@ -161,9 +282,19 @@ const WKBStore = {
   addProduct(product) {
     const list = this.getProducts();
     product.id = product.id || 'p' + Date.now();
+    if (!product.code) product.code = this.nextCode();
     list.push(product);
     this.saveProducts(list);
     return product;
+  },
+  /* Gera o próximo código no formato WKB-000 a partir do maior existente. */
+  nextCode() {
+    let max = 0;
+    this.getProducts().forEach((p) => {
+      const m = /WKB-(\d+)/i.exec(p.code || '');
+      if (m) max = Math.max(max, parseInt(m[1], 10));
+    });
+    return 'WKB-' + String(max + 1).padStart(3, '0');
   },
   updateProduct(id, patch) {
     const list = this.getProducts();
@@ -223,7 +354,11 @@ const WKBStore = {
 
   /* ------- Utilidades ------- */
   formatPrice(value) {
+    if (!value || Number(value) <= 0) return 'A combinar';
     return WKB_CONFIG.currency + ' ' + Number(value).toFixed(2).replace('.', ',');
+  },
+  hasPrice(value) {
+    return !!value && Number(value) > 0;
   },
   resetToDefaults() {
     localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(DEFAULT_PRODUCTS));

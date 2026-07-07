@@ -43,14 +43,29 @@ body {
   margin: 0;
   font-family: var(--font);
   color: var(--text);
-  background:
-    radial-gradient(900px 500px at 12% -8%, rgba(176, 38, 255, 0.18), transparent 60%),
-    radial-gradient(800px 460px at 100% 0%, rgba(0, 229, 255, 0.14), transparent 55%),
-    radial-gradient(700px 500px at 50% 120%, rgba(57, 255, 20, 0.1), transparent 60%),
-    var(--bg);
   min-height: 100vh;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+}
+
+/* Fundo do site (imagem enviada pela loja), fixo e com camada escura por
+   cima para o conteúdo continuar legível e o visual não ficar poluído.
+   Para trocar o fundo, substitua assets/wkb-fundo.jpg. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(8, 8, 13, 0.9), rgba(8, 8, 13, 0.94)),
+    radial-gradient(900px 500px at 12% -8%, rgba(176, 38, 255, 0.22), transparent 60%),
+    radial-gradient(800px 460px at 100% 0%, rgba(0, 229, 255, 0.16), transparent 55%),
+    url('../assets/wkb-fundo.jpg');
+  background-size: cover, cover, cover, 460px;
+  background-position: center;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-attachment: fixed;
 }
 
 a {
@@ -544,6 +559,20 @@ img {
   background: rgba(255, 60, 60, 0.15);
   color: #ff6b6b;
   border: 1px solid rgba(255, 60, 60, 0.4);
+}
+.code-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: rgba(8, 8, 13, 0.72);
+  color: var(--neon-blue);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  backdrop-filter: blur(4px);
 }
 
 .product-body {

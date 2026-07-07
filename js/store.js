@@ -155,9 +155,19 @@
 
   function productCard(p, index) {
     const isOut = p.status === 'esgotado';
+    const noPrice = !WKBStore.hasPrice(p.price);
+    let button;
+    if (isOut) {
+      button = `<button class="btn btn-ghost btn-sm" disabled>Esgotado</button>`;
+    } else if (noPrice) {
+      button = `<button class="btn btn-ghost btn-sm" disabled>A combinar</button>`;
+    } else {
+      button = `<button class="btn btn-primary btn-sm add-btn" data-id="${escapeAttr(p.id)}">Adicionar</button>`;
+    }
     return `<article class="product-card">
         <div class="product-media" style="color:${WKB_NEON_COLORS[index % WKB_NEON_COLORS.length]}">
           <span class="badge ${isOut ? 'esgotado' : 'disponivel'}">${isOut ? 'Esgotado' : 'Disponível'}</span>
+          ${p.code ? `<span class="code-badge">${escapeHtml(p.code)}</span>` : ''}
           ${productThumb(p, index)}
         </div>
         <div class="product-body">
@@ -166,13 +176,7 @@
           <p class="product-desc">${escapeHtml(p.description || '')}</p>
           <div class="product-foot">
             <span class="product-price">${WKBStore.formatPrice(p.price)}</span>
-            ${
-              isOut
-                ? `<button class="btn btn-ghost btn-sm" disabled>Esgotado</button>`
-                : `<button class="btn btn-primary btn-sm add-btn" data-id="${escapeAttr(
-                    p.id
-                  )}">Adicionar</button>`
-            }
+            ${button}
           </div>
         </div>
       </article>`;
@@ -190,6 +194,10 @@
   function addToCart(id) {
     const product = WKBStore.getProduct(id);
     if (!product || product.status === 'esgotado') return;
+    if (!WKBStore.hasPrice(product.price)) {
+      toast('Preço a combinar — fale com a loja sobre este item.');
+      return;
+    }
     const line = cart.find((l) => l.id === id);
     if (line) line.qty += 1;
     else cart.push({ id, qty: 1 });
@@ -269,7 +277,7 @@
         )}</div>
           <div class="cart-info">
             <h4>${escapeHtml(p.name)}</h4>
-            <div class="unit">${WKBStore.formatPrice(p.price)} • un.</div>
+            <div class="unit">${p.code ? '<strong>' + escapeHtml(p.code) + '</strong> · ' : ''}${WKBStore.formatPrice(p.price)} • un.</div>
             <button class="link-remove" data-remove="${escapeAttr(p.id)}">Remover</button>
           </div>
           <div class="cart-controls">
@@ -372,8 +380,9 @@
     lines.push('');
     lines.push('*Itens do pedido:*');
     items.forEach((p) => {
+      const code = p.code ? `[${p.code}] ` : '';
       lines.push(
-        `• ${p.qty}x ${p.name} — ${WKBStore.formatPrice(p.price)} = ${WKBStore.formatPrice(
+        `• ${code}${p.qty}x ${p.name} — ${WKBStore.formatPrice(p.price)} = ${WKBStore.formatPrice(
           p.lineTotal
         )}`
       );
