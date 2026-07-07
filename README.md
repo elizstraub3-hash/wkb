@@ -52,11 +52,22 @@ const WKB_CONFIG = {
   slogan: 'Estilo para sua brisa',
   whatsapp: '5511999999999', // 👈 TROQUE pelo número que recebe os pedidos
   currency: 'R$',
+
+  adminPassword: 'emi2026',            // senha do painel admin
+  pixKey: '60161518000139',            // chave PIX (CNPJ)
+  pixKeyType: 'CNPJ',
+  pixName: 'Wendrio Kauan Botelho',    // titular do PIX
+
+  deliveryTerms: [ /* itens do termo de entrega */ ],
 };
 ```
 
-O número do WhatsApp deve estar no formato internacional, só com dígitos:
-`55` (Brasil) + DDD + número. Exemplo: `5511999999999`.
+- **WhatsApp**: formato internacional, só dígitos: `55` (Brasil) + DDD + número.
+- **adminPassword**: senha para entrar no painel (`admin.html`).
+- **pixKey / pixName**: aparecem no carrinho, na página "Como comprar", no contato
+  e na mensagem enviada ao WhatsApp.
+- **deliveryTerms**: itens do termo de entrega (uma frase por item). O cliente
+  precisa marcar "Li e aceito o termo de entrega" para finalizar o pedido.
 
 ---
 
@@ -77,6 +88,14 @@ Produtos marcados como **Esgotado** aparecem com o botão desativado.
 ---
 
 ## 🔧 Painel administrativo (`admin.html`)
+
+> 🔒 **Área privada.** O painel pede senha para entrar.
+> **Senha padrão: `emi2026`** (troque em `js/data.js` → `WKB_CONFIG.adminPassword`).
+> A sessão fica ativa enquanto a aba estiver aberta; use o botão **Sair** para bloquear.
+>
+> Por ser um site estático, essa é uma proteção do lado do cliente — mantém o painel
+> fora do alcance casual dos visitantes. Para segurança de verdade, hospede o
+> `admin.html` num local restrito ou atrás de um login de servidor.
 
 O dono da loja pode, sem mexer no código:
 
@@ -117,8 +136,20 @@ no valor de cada um (R$ 105 a R$ 180).
 ## 🎨 Design
 
 - Fundo grafite/preto com brilhos neon (verde, roxo, azul, amarelo, laranja)
-- Logo **WKB** em destaque grande na home
+- Logo **WKB** (emblema em `assets/logo.svg`) no menu, no rodapé, no painel e
+  em destaque grande na home
 - Cards modernos, botões chamativos e layout **100% responsivo** (celular incluso)
+
+Para trocar o logo, substitua **`assets/logo.svg`** (ou aponte as tags `<img>`
+para um `.png`/`.jpg` seu).
+
+## 💳 Pagamento (PIX) e Termo de entrega
+
+- O **PIX** aparece no carrinho (com botão **Copiar**), na página "Como comprar",
+  no contato e vai junto na mensagem do WhatsApp.
+- O **termo de entrega** é mostrado no carrinho; o cliente precisa **aceitar**
+  (checkbox) antes de enviar o pedido, e o aceite fica registrado na mensagem.
+- Edite os dois em `js/data.js` (`pixKey`, `pixName`, `deliveryTerms`).
 
 ---
 

@@ -247,13 +247,61 @@
     renderProducts();
   }
 
+  /* ---------------------------------------------------------------------
+     LOGIN — painel privado com senha (WKB_CONFIG.adminPassword)
+     A sessão fica válida enquanto a aba estiver aberta (sessionStorage).
+     Observação: por ser um site estático, esta é uma proteção simples do
+     lado do cliente — mantém o painel fora do alcance casual dos visitantes.
+     ------------------------------------------------------------------- */
+  const AUTH_KEY = 'wkb_admin_auth';
+
+  function isAuthenticated() {
+    return sessionStorage.getItem(AUTH_KEY) === '1';
+  }
+
+  function showPanel() {
+    $('#loginOverlay').style.display = 'none';
+    $('#adminShell').style.display = 'block';
+    renderAll();
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const pass = $('#loginPass').value;
+    if (pass === WKB_CONFIG.adminPassword) {
+      sessionStorage.setItem(AUTH_KEY, '1');
+      $('#loginError').closest('.field').classList.remove('invalid');
+      showPanel();
+    } else {
+      $('#loginError').closest('.field').classList.add('invalid');
+      $('#loginPass').value = '';
+      $('#loginPass').focus();
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem(AUTH_KEY);
+    location.reload();
+  }
+
   /* ---------- Init ---------- */
   function init() {
+    // Login
+    $('#loginForm').addEventListener('submit', handleLogin);
+    $('#logoutBtn').addEventListener('click', logout);
+
+    // Ações do painel
     $('#productForm').addEventListener('submit', submitForm);
     $('#categoryForm').addEventListener('submit', submitCategory);
     $('#cancelEditBtn').addEventListener('click', resetForm);
     $('#resetBtn').addEventListener('click', resetAll);
-    renderAll();
+
+    if (isAuthenticated()) {
+      showPanel();
+    } else {
+      $('#loginOverlay').style.display = 'flex';
+      $('#loginPass').focus();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', init);

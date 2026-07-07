@@ -13,8 +13,11 @@
   <header class="site-header">
     <div class="container nav">
       <a href="#home" class="nav-brand" aria-label="WKB Headshop">
-        <span><span class="brand-w">W</span><span class="brand-k">K</span><span class="brand-b">B</span></span>
-        <small>HEADSHOP</small>
+        <img src="assets/logo.svg" class="brand-logo" alt="WKB Headshop" />
+        <span class="brand-word">
+          <span><span class="brand-w">W</span><span class="brand-k">K</span><span class="brand-b">B</span></span>
+          <small>HEADSHOP</small>
+        </span>
       </a>
 
       <nav>
@@ -43,6 +46,7 @@
     <section class="page" id="page-home">
       <div class="hero">
         <div class="hero-inner">
+          <img src="assets/logo.svg" class="hero-logo" alt="WKB Headshop" />
           <h1 class="logo-hero">
             <span class="l1">W</span><span class="l2">K</span><span class="l3">B</span>
           </h1>
@@ -159,10 +163,39 @@
             <p>Escolha se vai retirar no local ou receber. Se for entrega, preencha seu endereço.</p>
           </div>
           <div class="step">
+            <h4>Pague no PIX</h4>
+            <p>O pagamento é feito por PIX. A chave e o titular aparecem no carrinho e na mensagem do pedido.</p>
+          </div>
+          <div class="step">
             <h4>Envie pelo WhatsApp</h4>
             <p>O site monta a mensagem do pedido e abre o WhatsApp para você confirmar. Pronto!</p>
           </div>
         </div>
+
+        <!-- PIX + Termo -->
+        <div class="about-grid" style="margin-top:22px;">
+          <div class="info-card">
+            <h3 style="margin:0 0 12px;">💠 Pagamento via PIX</h3>
+            <div class="pix-box" style="margin:0;">
+              <div class="pix-row">
+                <div>
+                  <span class="pix-label" id="pixTypeLabel2">Chave (CNPJ)</span>
+                  <span class="pix-key" id="pixKey2"></span>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" id="copyPixBtn2">Copiar</button>
+              </div>
+              <div class="pix-name" id="pixName2"></div>
+            </div>
+            <p class="footer-note" style="margin-top:10px;">
+              Envie o comprovante pelo WhatsApp. O pedido é separado após a confirmação do pagamento.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3 style="margin:0 0 12px;">📄 Termo de entrega</h3>
+            <ul class="terms-list" id="termsListInfo"></ul>
+          </div>
+        </div>
+
         <div style="text-align:center; margin-top:28px;">
           <a href="#produtos" class="btn btn-primary" data-route="produtos">Começar meu pedido →</a>
         </div>
@@ -246,6 +279,29 @@
               <input class="input" id="dfNomeRetirada" placeholder="Como podemos te chamar? (opcional)" />
             </div>
 
+            <!-- Pagamento via PIX -->
+            <div class="pix-box">
+              <div class="pix-head">💠 Pagamento via PIX</div>
+              <div class="pix-row">
+                <div>
+                  <span class="pix-label" id="pixTypeLabel">Chave (CNPJ)</span>
+                  <span class="pix-key" id="pixKey"></span>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" id="copyPixBtn">Copiar</button>
+              </div>
+              <div class="pix-name" id="pixName"></div>
+            </div>
+
+            <!-- Termo de entrega (obrigatório aceitar) -->
+            <div class="terms-box">
+              <div class="terms-head">📄 Termo de entrega</div>
+              <ul class="terms-list" id="termsList"></ul>
+              <label class="terms-accept">
+                <input type="checkbox" id="acceptTerms" />
+                <span>Li e <strong>aceito o termo de entrega</strong>.</span>
+              </label>
+            </div>
+
             <button class="btn btn-whatsapp btn-block" id="checkoutBtn">
               📲 Enviar pedido pelo WhatsApp
             </button>
@@ -269,6 +325,7 @@
         <div class="info-card">
           <ul class="contact-list">
             <li><span class="ico">📲</span> <span>Atendimento e pedidos: pelo WhatsApp, ao finalizar sua compra.</span></li>
+            <li><span class="ico">💠</span> <span>Pagamento via PIX — <strong id="pixNameContato"></strong> · <span id="pixKeyContato"></span></span></li>
             <li><span class="ico">🕒</span> <span>Horário: Seg a Sáb, das 10h às 20h.</span></li>
             <li><span class="ico">📍</span> <span>Retirada no local combinada na finalização do pedido.</span></li>
             <li><span class="ico">📷</span> <span>Redes sociais: @wkbheadshop (atualize com seu perfil real).</span></li>
@@ -287,6 +344,7 @@
     <div class="container footer-inner">
       <div>
         <div class="nav-brand" style="margin-bottom:6px;">
+          <img src="assets/logo.svg" class="brand-logo" alt="WKB Headshop" />
           <span><span class="brand-w">W</span><span class="brand-k">K</span><span class="brand-b">B</span></span>
           <small>HEADSHOP</small>
         </div>

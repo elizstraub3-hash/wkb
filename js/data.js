@@ -20,6 +20,25 @@ const WKB_CONFIG = {
   // Ex.: 55 (Brasil) + DDD + número  ->  5511999999999
   whatsapp: '5511999999999',
   currency: 'R$',
+
+  // Senha do painel administrativo (admin.html)
+  adminPassword: 'emi2026',
+
+  // Dados do PIX para pagamento
+  pixKey: '60161518000139',
+  pixKeyType: 'CNPJ',
+  pixName: 'Wendrio Kauan Botelho',
+
+  // Termo de entrega — o cliente precisa aceitar antes de enviar o pedido.
+  // Edite o texto abaixo à vontade (uma linha por item).
+  deliveryTerms: [
+    'Confirmo que sou maior de 18 anos.',
+    'Confirmo que os dados de entrega informados estão corretos e completos.',
+    'Estou ciente de que a entrega é combinada e confirmada pelo WhatsApp após o pedido.',
+    'O pagamento é feito via PIX; o pedido é separado após a confirmação do pagamento.',
+    'Produtos são acessórios para uso adulto e legal. Não há troca de itens já utilizados.',
+    'Prazos e taxa de entrega podem variar conforme a região e serão informados no atendimento.',
+  ],
 };
 
 /* Categorias padrão. O "icon" define a ilustração SVG do card. */

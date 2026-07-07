@@ -397,6 +397,16 @@
       lines.push('🏬 *Forma:* Retirada no local');
     }
 
+    // Pagamento PIX
+    lines.push('');
+    lines.push('💠 *Pagamento:* PIX');
+    lines.push('Chave (' + WKB_CONFIG.pixKeyType + '): ' + WKB_CONFIG.pixKey);
+    lines.push('Titular: ' + WKB_CONFIG.pixName);
+
+    // Termo de entrega
+    lines.push('');
+    lines.push('✅ Cliente leu e aceitou o *termo de entrega*.');
+
     return lines.join('\n');
   }
 
@@ -416,11 +426,100 @@
       toast('Preencha os dados de entrega.');
       return;
     }
+    // Termo de entrega obrigatório
+    const termsBox = $('.terms-box');
+    if (!$('#acceptTerms').checked) {
+      termsBox.classList.add('invalid');
+      termsBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      toast('Aceite o termo de entrega para continuar.');
+      return;
+    }
+    termsBox.classList.remove('invalid');
 
     const message = buildWhatsappMessage();
     const url = 'https://wa.me/' + WKB_CONFIG.whatsapp + '?text=' + encodeURIComponent(message);
     window.open(url, '_blank');
     toast('Abrindo o WhatsApp com seu pedido... 📲');
+  }
+
+  /* =====================================================================
+     PIX e TERMO DE ENTREGA (preenchimento a partir de WKB_CONFIG)
+     ===================================================================== */
+  function setText(sel, text) {
+    const el = $(sel);
+    if (el) el.textContent = text;
+  }
+
+  function setupPixAndTerms() {
+    const typeLabel = 'Chave (' + WKB_CONFIG.pixKeyType + ')';
+    // Carrinho
+    setText('#pixTypeLabel', typeLabel);
+    setText('#pixKey', WKB_CONFIG.pixKey);
+    setText('#pixName', WKB_CONFIG.pixName);
+    const nameEl = $('#pixName');
+    if (nameEl) nameEl.innerHTML = 'Titular: <strong>' + escapeHtml(WKB_CONFIG.pixName) + '</strong>';
+    // Como comprar
+    setText('#pixTypeLabel2', typeLabel);
+    setText('#pixKey2', WKB_CONFIG.pixKey);
+    const nameEl2 = $('#pixName2');
+    if (nameEl2) nameEl2.innerHTML = 'Titular: <strong>' + escapeHtml(WKB_CONFIG.pixName) + '</strong>';
+    // Contato
+    setText('#pixNameContato', WKB_CONFIG.pixName);
+    setText('#pixKeyContato', WKB_CONFIG.pixKey);
+
+    // Termo de entrega (listas)
+    const terms = WKB_CONFIG.deliveryTerms || [];
+    const html = terms.map((t) => `<li>${escapeHtml(t)}</li>`).join('');
+    ['#termsList', '#termsListInfo'].forEach((sel) => {
+      const el = $(sel);
+      if (el) el.innerHTML = html;
+    });
+
+    // Tira o estado de erro assim que o cliente marca o termo
+    const accept = $('#acceptTerms');
+    if (accept) {
+      accept.addEventListener('change', () => {
+        if (accept.checked) $('.terms-box').classList.remove('invalid');
+      });
+    }
+
+    // Botões de copiar PIX
+    ['#copyPixBtn', '#copyPixBtn2'].forEach((sel) => {
+      const btn = $(sel);
+      if (!btn) return;
+      btn.addEventListener('click', () => copyPix(btn));
+    });
+  }
+
+  function copyPix(btn) {
+    const key = WKB_CONFIG.pixKey;
+    const done = () => {
+      const original = btn.textContent;
+      btn.textContent = 'Copiado ✓';
+      toast('Chave PIX copiada ✓');
+      setTimeout(() => (btn.textContent = original), 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(key).then(done).catch(() => fallbackCopy(key, done));
+    } else {
+      fallbackCopy(key, done);
+    }
+  }
+
+  function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      done();
+    } catch (e) {
+      toast('Copie a chave: ' + text);
+    }
+    ta.remove();
   }
 
   /* =====================================================================
@@ -443,6 +542,7 @@
     });
 
     setupFulfillment();
+    setupPixAndTerms();
     $('#checkoutBtn').addEventListener('click', checkout);
 
     updateCartCount();
