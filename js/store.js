@@ -209,6 +209,13 @@
       return;
     }
     const isOut = product.status === 'esgotado';
+    // Item esgotado: pergunta se o cliente quer pedir e aguardar mesmo assim
+    if (isOut) {
+      const ok = window.confirm(
+        'Esse item está ESGOTADO.\n\nVocê deseja aguardar a reposição e pedir mesmo assim?'
+      );
+      if (!ok) return;
+    }
     const line = cart.find((l) => l.id === id);
     if (line) line.qty += 1;
     else cart.push({ id, qty: 1 });

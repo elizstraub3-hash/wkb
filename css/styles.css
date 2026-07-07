@@ -575,36 +575,36 @@ img {
   position: absolute;
   top: 12px;
   left: 12px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 .badge.disponivel {
-  background: rgba(57, 255, 20, 0.15);
-  color: var(--neon-green);
-  border: 1px solid rgba(57, 255, 20, 0.4);
+  color: #0a8a00;
+  border: 2px solid #39ff14;
 }
 .badge.esgotado {
-  background: rgba(255, 60, 60, 0.15);
-  color: #ff6b6b;
-  border: 1px solid rgba(255, 60, 60, 0.4);
+  color: #d81e1e;
+  border: 2px solid #ff4d4d;
 }
 .code-badge {
   position: absolute;
   top: 12px;
   right: 12px;
-  padding: 4px 9px;
+  padding: 5px 11px;
   border-radius: 999px;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.5px;
-  background: rgba(8, 8, 13, 0.72);
-  color: var(--neon-blue);
-  border: 1px solid rgba(0, 229, 255, 0.4);
-  backdrop-filter: blur(4px);
+  background: #ffffff;
+  color: #0077a3;
+  border: 2px solid var(--neon-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 .product-body {
