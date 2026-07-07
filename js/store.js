@@ -316,14 +316,14 @@
     const optRetirada = $('#optRetirada');
     const optEntrega = $('#optEntrega');
     const deliveryFields = $('#deliveryFields');
-    const pickupNameField = $('#pickupNameField');
+    const pickupFields = $('#pickupFields');
 
     function refresh() {
       const value = getFulfillment();
       optRetirada.classList.toggle('selected', value === 'retirada');
       optEntrega.classList.toggle('selected', value === 'entrega');
       deliveryFields.style.display = value === 'entrega' ? 'block' : 'none';
-      pickupNameField.style.display = value === 'retirada' ? 'block' : 'none';
+      pickupFields.style.display = value === 'retirada' ? 'block' : 'none';
     }
 
     optRetirada.addEventListener('change', refresh);
@@ -395,6 +395,7 @@
 
     if (fulfillment === 'entrega') {
       lines.push('🏍️ *Forma:* Entrega por UberMoto (o cliente solicita a corrida)');
+      lines.push('Retirar em (origem): ' + WKB_CONFIG.storeAddress);
       lines.push('');
       lines.push('*Dados de entrega:*');
       lines.push('Nome: ' + $('#dfNome').value.trim());
@@ -405,6 +406,7 @@
       if (obs) lines.push('Observação: ' + obs);
     } else {
       lines.push('🏬 *Forma:* Retirada no local');
+      lines.push('Endereço: ' + WKB_CONFIG.storeAddress);
     }
 
     // Pagamento PIX
@@ -476,6 +478,11 @@
     // Contato
     setText('#pixNameContato', WKB_CONFIG.pixName);
     setText('#pixKeyContato', WKB_CONFIG.pixKey);
+
+    // Endereço da loja (retirada / origem UberMoto)
+    setText('#storeAddrPickup', WKB_CONFIG.storeAddress);
+    setText('#storeAddrDelivery', WKB_CONFIG.storeAddress);
+    setText('#storeAddrContato', WKB_CONFIG.storeAddress);
 
     // Termo de entrega (listas)
     const terms = WKB_CONFIG.deliveryTerms || [];

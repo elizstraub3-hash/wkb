@@ -30,6 +30,9 @@ const WKB_CONFIG = {
   pixKeyType: 'CNPJ',
   pixName: 'Wendrio Kauan Botelho',
 
+  // Endereço da loja (ponto de retirada / origem do UberMoto)
+  storeAddress: 'Rua das Macieiras, 63 — Jardim das Graças, Colombo/PR',
+
   // Termo de entrega — o cliente precisa aceitar antes de enviar o pedido.
   // Edite o texto abaixo à vontade (uma linha por item).
   deliveryTerms: [
