@@ -84,7 +84,11 @@ const WKB_CONFIG = {
 
 > O WhatsApp **só aparece no final da compra** — nunca na home como bloco de contato.
 
-Produtos marcados como **Esgotado** aparecem com o botão desativado.
+Produtos marcados como **Esgotado** mostram um aviso e o botão
+**“Solicitar mesmo assim”** — o cliente pode pedir e aguardar a reposição.
+O item vai para o carrinho e para a mensagem do WhatsApp marcado como
+*“ESGOTADO – sob encomenda”*. (Se o item esgotado estiver sem preço, aí sim
+o botão fica desativado, indicando falar com a loja pelo WhatsApp.)
 
 ---
 

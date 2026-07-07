@@ -158,8 +158,15 @@
     const isOut = p.status === 'esgotado';
     const noPrice = !WKBStore.hasPrice(p.price);
     let button;
-    if (isOut) {
+    let outMsg = '';
+    if (isOut && noPrice) {
+      // Esgotado e sem preço: não dá para calcular no carrinho
       button = `<button class="btn btn-ghost btn-sm" disabled>Esgotado</button>`;
+      outMsg = `<p class="out-msg">🔔 Esgotado. Fale com a loja pelo WhatsApp para solicitar e aguardar reposição.</p>`;
+    } else if (isOut) {
+      // Esgotado com preço: cliente pode solicitar mesmo assim
+      button = `<button class="btn btn-purple btn-sm add-btn" data-id="${escapeAttr(p.id)}">Solicitar mesmo assim</button>`;
+      outMsg = `<p class="out-msg">🔔 Esgotado — você pode solicitar mesmo assim e aguardar a reposição. Confirmamos o prazo pelo WhatsApp.</p>`;
     } else if (noPrice) {
       button = `<button class="btn btn-ghost btn-sm" disabled>A combinar</button>`;
     } else {
@@ -175,6 +182,7 @@
           <div class="product-cat">${escapeHtml(WKBStore.categoryName(p.category))}</div>
           <h3 class="product-name">${escapeHtml(p.name)}</h3>
           <p class="product-desc">${escapeHtml(p.description || '')}</p>
+          ${outMsg}
           <div class="product-foot">
             <span class="product-price">${WKBStore.formatPrice(p.price)}</span>
             ${button}
@@ -194,17 +202,23 @@
      ===================================================================== */
   function addToCart(id) {
     const product = WKBStore.getProduct(id);
-    if (!product || product.status === 'esgotado') return;
+    if (!product) return;
+    // Sem preço não entra no carrinho (não dá para somar)
     if (!WKBStore.hasPrice(product.price)) {
       toast('Preço a combinar — fale com a loja sobre este item.');
       return;
     }
+    const isOut = product.status === 'esgotado';
     const line = cart.find((l) => l.id === id);
     if (line) line.qty += 1;
     else cart.push({ id, qty: 1 });
     persistCart();
     updateCartCount();
-    toast(product.name + ' adicionado ao carrinho ✓');
+    toast(
+      isOut
+        ? product.name + ' adicionado (esgotado — sob encomenda) ✓'
+        : product.name + ' adicionado ao carrinho ✓'
+    );
   }
 
   function changeQty(id, delta) {
@@ -279,6 +293,7 @@
           <div class="cart-info">
             <h4>${escapeHtml(p.name)}</h4>
             <div class="unit">${p.code ? '<strong>' + escapeHtml(p.code) + '</strong> · ' : ''}${WKBStore.formatPrice(p.price)} • un.</div>
+            ${p.status === 'esgotado' ? '<div class="cart-tag-out">🔔 Esgotado — sob encomenda</div>' : ''}
             <button class="link-remove" data-remove="${escapeAttr(p.id)}">Remover</button>
           </div>
           <div class="cart-controls">
@@ -385,10 +400,11 @@
     lines.push('*Itens do pedido:*');
     items.forEach((p) => {
       const code = p.code ? `[${p.code}] ` : '';
+      const out = p.status === 'esgotado' ? ' ⚠️(ESGOTADO - sob encomenda)' : '';
       lines.push(
         `• ${code}${p.qty}x ${p.name} — ${WKBStore.formatPrice(p.price)} = ${WKBStore.formatPrice(
           p.lineTotal
-        )}`
+        )}${out}`
       );
     });
     lines.push('');

@@ -632,6 +632,29 @@ img {
   margin: 0 0 14px;
   flex: 1;
 }
+.out-msg {
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.35);
+  color: var(--neon-orange);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.cart-tag-out {
+  display: inline-block;
+  margin: 2px 0 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 107, 0, 0.12);
+  border: 1px solid rgba(255, 107, 0, 0.4);
+  color: var(--neon-orange);
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .product-foot {
   display: flex;
   align-items: center;
