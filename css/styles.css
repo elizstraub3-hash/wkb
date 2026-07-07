@@ -313,6 +313,18 @@ img {
   max-width: 520px;
   margin: 0 auto 26px;
 }
+.hero-phrase {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: clamp(16px, 3vw, 22px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #08080d;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  box-shadow: 0 0 26px rgba(57, 255, 20, 0.5);
+}
 
 /* =============================== BOTÕES =============================== */
 .btn {

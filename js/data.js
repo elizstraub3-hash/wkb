@@ -34,10 +34,10 @@ const WKB_CONFIG = {
   deliveryTerms: [
     'Confirmo que sou maior de 18 anos.',
     'Confirmo que os dados de entrega informados estão corretos e completos.',
-    'Estou ciente de que a entrega é combinada e confirmada pelo WhatsApp após o pedido.',
+    'Estou ciente de que a entrega é feita por UberMoto, ou por retirada no local.',
+    'A taxa da corrida (UberMoto) é combinada e informada pelo WhatsApp conforme a região.',
     'O pagamento é feito via PIX; o pedido é separado após a confirmação do pagamento.',
     'Produtos são acessórios para uso adulto e legal. Não há troca de itens já utilizados.',
-    'Prazos e taxa de entrega podem variar conforme a região e serão informados no atendimento.',
   ],
 };
 
@@ -46,6 +46,8 @@ const DEFAULT_CATEGORIES = [
   { id: 'kits-estojo', name: 'Kits com Estojo', icon: 'tray' },
   { id: 'kits-bandeja', name: 'Kits com Bandeja', icon: 'tray' },
   { id: 'kits-cesta', name: 'Kits com Cesta', icon: 'tray' },
+  { id: 'piteiras', name: 'Piteiras', icon: 'seda' },
+  { id: 'isqueiros', name: 'Isqueiros', icon: 'lighter' },
 ];
 
 /* Catálogo inicial com produtos reais da WKB Headshop.
@@ -248,7 +250,7 @@ const STORAGE_KEYS = {
 /* Sempre que o catálogo padrão (DEFAULT_PRODUCTS/CATEGORIES) mudar aqui no
    código, aumente este número. Isso faz a loja recarregar o catálogo novo
    para quem já visitou o site antes. */
-const DATA_VERSION = '3';
+const DATA_VERSION = '4';
 
 const WKBStore = {
   /* Garante que o localStorage tenha os dados iniciais.

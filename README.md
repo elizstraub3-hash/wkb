@@ -75,8 +75,9 @@ const WKB_CONFIG = {
 
 1. O cliente navega pelos **Produtos** e clica em **Adicionar ao carrinho**.
 2. No **Carrinho**, ele ajusta as quantidades (o total é somado automaticamente).
-3. Antes de enviar, escolhe **Retirada** ou **Entrega**.
-   - Se escolher **Entrega**, preenche nome, endereço, bairro, cidade e observação.
+3. Antes de enviar, escolhe **Retirada** ou **Entrega por UberMoto**.
+   - Se escolher **Entrega (UberMoto)**, preenche nome, endereço, bairro, cidade e observação.
+   - A taxa da corrida do UberMoto é combinada e informada pelo WhatsApp.
 4. Ao clicar em **Enviar pedido pelo WhatsApp**, o site monta uma mensagem
    pronta (cliente, itens, quantidades, valor total, forma e dados de entrega)
    e abre o WhatsApp da loja.

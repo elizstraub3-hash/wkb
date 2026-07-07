@@ -88,10 +88,11 @@
         const count = products.filter((p) => p.category === c.id).length;
         const color = WKB_NEON_COLORS[i % WKB_NEON_COLORS.length];
         const icon = WKB_ICONS[c.icon] ? WKB_ICONS[c.icon](color) : WKB_ICONS.tray(color);
+        const label = count === 0 ? 'Em breve 🔜' : count + (count === 1 ? ' produto' : ' produtos');
         return `<button class="cat-card" data-cat="${escapeAttr(c.id)}">
             <div class="cat-icon">${icon}</div>
             <h3>${escapeHtml(c.name)}</h3>
-            <p>${count} ${count === 1 ? 'produto' : 'produtos'}</p>
+            <p>${label}</p>
           </button>`;
       })
       .join('');
@@ -144,8 +145,8 @@
     const grid = $('#productGrid');
     if (filtered.length === 0) {
       grid.innerHTML = `<div class="empty" style="grid-column:1/-1;">
-          <h3>Nenhum produto nesta categoria</h3>
-          <p>Escolha outra categoria ou volte mais tarde.</p>
+          <h3>Em breve nesta categoria 🔜</h3>
+          <p>Estamos preparando novidades aqui. Enquanto isso, confira as outras categorias.</p>
         </div>`;
       return;
     }
@@ -393,7 +394,7 @@
     lines.push('');
 
     if (fulfillment === 'entrega') {
-      lines.push('🚚 *Forma:* Entrega');
+      lines.push('🏍️ *Forma:* Entrega por UberMoto');
       lines.push('');
       lines.push('*Dados de entrega:*');
       lines.push('Nome: ' + $('#dfNome').value.trim());
