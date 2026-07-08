@@ -166,7 +166,7 @@
     } else if (isOut) {
       // Esgotado com preço: cliente pode solicitar mesmo assim
       button = `<button class="btn btn-purple btn-sm add-btn" data-id="${escapeAttr(p.id)}">Solicitar mesmo assim</button>`;
-      outMsg = `<p class="out-msg">🔔 Esgotado — você pode solicitar mesmo assim e aguardar a reposição. Confirmamos o prazo pelo WhatsApp.</p>`;
+      outMsg = `<p class="out-msg">🔔 Esgotado — solicite e aguarde a reposição.</p>`;
     } else if (noPrice) {
       button = `<button class="btn btn-ghost btn-sm" disabled>A combinar</button>`;
     } else {
