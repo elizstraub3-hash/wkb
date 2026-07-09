@@ -163,6 +163,68 @@
     toast('Produto excluído.');
   }
 
+  /* ---------- Imagem: foto do celular (redimensionada) ou URL ---------- */
+  // Guarda a imagem escolhida no campo escondido #pImage e mostra a prévia.
+  function setImage(value) {
+    $('#pImage').value = value || '';
+    const wrap = $('#imgPreviewWrap');
+    if (value) {
+      $('#imgPreview').src = value;
+      wrap.style.display = 'block';
+    } else {
+      $('#imgPreview').removeAttribute('src');
+      wrap.style.display = 'none';
+    }
+  }
+
+  // Lê o arquivo de imagem e reduz para no máx. 900px (JPEG) para caber no
+  // armazenamento do navegador. Retorna uma "data URL" (base64).
+  function fileToResizedDataUrl(file, maxDim, quality) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let w = img.width;
+          let h = img.height;
+          if (w > h && w > maxDim) {
+            h = Math.round((h * maxDim) / w);
+            w = maxDim;
+          } else if (h >= w && h > maxDim) {
+            w = Math.round((w * maxDim) / h);
+            h = maxDim;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleImageFile(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      toast('Selecione um arquivo de imagem.');
+      return;
+    }
+    try {
+      const dataUrl = await fileToResizedDataUrl(file, 900, 0.8);
+      setImage(dataUrl);
+      $('#pImageUrl').value = '';
+      toast('Foto carregada ✓');
+    } catch (err) {
+      toast('Não consegui ler essa imagem. Tente outra.');
+    }
+  }
+
   /* ---------- Formulário: adicionar/editar ---------- */
   function startEdit(id) {
     const p = WKBStore.getProduct(id);
@@ -175,8 +237,12 @@
     fillCategorySelect();
     $('#pCategory').value = p.category;
     $('#pDesc').value = p.description || '';
-    $('#pImage').value = p.image || '';
     $('#pStatus').value = p.status;
+
+    // Imagem atual: mostra a prévia e, se for link, preenche o campo de URL
+    $('#pImageFile').value = '';
+    setImage(p.image || '');
+    $('#pImageUrl').value = p.image && /^https?:\/\//i.test(p.image) ? p.image : '';
 
     $('#formTitle').textContent = '✏️ Editar produto';
     $('#saveBtn').textContent = 'Salvar alterações';
@@ -188,6 +254,9 @@
     editingId = null;
     $('#productForm').reset();
     $('#pId').value = '';
+    setImage('');
+    $('#pImageUrl').value = '';
+    $('#pImageFile').value = '';
     // Já sugere o próximo código para um novo produto
     $('#pCode').value = WKBStore.nextCode();
     $('#formTitle').textContent = '➕ Adicionar produto';
@@ -217,12 +286,18 @@
       icon: cat ? cat.icon : 'tray',
     };
 
-    if (editingId) {
-      WKBStore.updateProduct(editingId, data);
-      toast('Produto atualizado ✓');
-    } else {
-      WKBStore.addProduct(data);
-      toast('Produto adicionado ✓');
+    try {
+      if (editingId) {
+        WKBStore.updateProduct(editingId, data);
+        toast('Produto atualizado ✓');
+      } else {
+        WKBStore.addProduct(data);
+        toast('Produto adicionado ✓');
+      }
+    } catch (err) {
+      // Normalmente ocorre se o armazenamento do navegador encheu de fotos
+      toast('Armazenamento cheio. Use uma foto menor ou remova produtos antigos.');
+      return;
     }
     resetForm();
     renderProducts();
@@ -306,6 +381,15 @@
     $('#categoryForm').addEventListener('submit', submitCategory);
     $('#cancelEditBtn').addEventListener('click', resetForm);
     $('#resetBtn').addEventListener('click', resetAll);
+
+    // Imagem: foto do celular, link (URL) e remover
+    $('#pImageFile').addEventListener('change', handleImageFile);
+    $('#pImageUrl').addEventListener('input', () => setImage($('#pImageUrl').value.trim()));
+    $('#removeImgBtn').addEventListener('click', () => {
+      setImage('');
+      $('#pImageUrl').value = '';
+      $('#pImageFile').value = '';
+    });
 
     if (isAuthenticated()) {
       showPanel();

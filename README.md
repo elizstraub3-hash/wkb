@@ -117,13 +117,23 @@ Todas as alterações são salvas no navegador (**localStorage**) e aparecem
 
 ### Sobre as imagens
 
-As fotos reais dos produtos ficam na pasta **`assets/products/`**. Cada produto
-aponta para a sua foto pelo campo "URL da imagem" (ex.: `assets/products/kit-barbie.jpg`).
+No painel, o campo **“Foto do produto”** aceita duas formas:
 
-- Para **trocar a foto** de um kit, substitua o arquivo em `assets/products/`
-  mantendo o mesmo nome, ou cole uma nova URL/caminho no campo do painel.
-- Se o campo ficar vazio, o site mostra uma **ilustração neon** da categoria —
-  nada de fotos falsas.
+1. **📱 Enviar do celular** (recomendado): toque em escolher arquivo e tire uma
+   foto na hora ou selecione da galeria. A imagem é **reduzida automaticamente**
+   (máx. 900px, JPEG) e salva junto do produto — aparece na hora na loja.
+2. **Link (URL)**: abra “ou usar um link (URL) da imagem” e cole o endereço de
+   uma foto já hospedada.
+
+As fotos que já vêm com o site ficam na pasta **`assets/products/`**. Para trocar
+uma delas por arquivo, substitua mantendo o mesmo nome — ou simplesmente envie
+uma foto nova pelo painel.
+
+- Se ficar sem foto, o site mostra uma **ilustração neon** da categoria — nada
+  de fotos falsas.
+- As fotos enviadas pelo celular ficam salvas no navegador (localStorage). Como
+  o espaço é limitado (~5MB), a redução automática mantém tudo leve; se aparecer
+  aviso de “armazenamento cheio”, use fotos menores ou remova produtos antigos.
 
 O catálogo já vem com os **6 kits reais da loja** (estojos e bandejas), com preço
 no valor de cada um (R$ 105 a R$ 180).

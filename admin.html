@@ -69,11 +69,24 @@
               <textarea class="textarea" id="pDesc" placeholder="Descrição breve do produto"></textarea>
             </div>
             <div class="field">
-              <label>URL da imagem (opcional)</label>
-              <input class="input" id="pImage" placeholder="https://... (deixe vazio para usar ilustração)" />
+              <label>Foto do produto</label>
+              <!-- Guarda o valor final da imagem (foto do celular em base64 ou URL) -->
+              <input type="hidden" id="pImage" />
+              <input class="input" id="pImageFile" type="file" accept="image/*" />
               <div class="footer-note" style="margin-top:4px;">
-                Cole o link de uma foto real. Vazio = ilustração neon da categoria.
+                📷 Tire uma foto ou escolha da galeria do celular. A imagem é reduzida automaticamente.
               </div>
+              <div id="imgPreviewWrap" style="display:none; margin-top:10px;">
+                <img id="imgPreview" alt="Prévia da foto"
+                  style="width:110px; height:110px; object-fit:cover; border-radius:10px; border:1px solid var(--border);" />
+                <div style="margin-top:8px;">
+                  <button type="button" class="btn btn-ghost btn-sm" id="removeImgBtn">Remover foto</button>
+                </div>
+              </div>
+              <details style="margin-top:10px;">
+                <summary class="footer-note" style="cursor:pointer;">ou usar um link (URL) da imagem</summary>
+                <input class="input" id="pImageUrl" placeholder="https://..." style="margin-top:6px;" />
+              </details>
             </div>
             <div class="field">
               <label>Status</label>
